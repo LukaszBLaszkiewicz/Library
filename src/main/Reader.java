@@ -2,7 +2,7 @@ package main;
 
 public class Reader {
     private Integer id;
-    private String name;
+    private String firstName;
     private String lastName;
     private String addressStreetName;
     private Integer addressHouseNumber;
@@ -10,7 +10,7 @@ public class Reader {
 
     public Reader(Integer id, String name, String lastName, String addressStreetName, Integer addressHouseNumber, Integer phoneNumber) {
         this.id = id;
-        this.name = name;
+        this.firstName = name;
         this.lastName = lastName;
         this.addressStreetName = addressStreetName;
         this.addressHouseNumber = addressHouseNumber;
@@ -26,11 +26,11 @@ public class Reader {
     }
 
     public String getName() {
-        return name;
+        return firstName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.firstName = name;
     }
 
     public String getLastName() {
