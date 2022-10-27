@@ -40,12 +40,12 @@ public class DatabaseManager {
         }
     }
     //====================================================================================================================================================
-    public void addLibrarianToDatabase(Integer ID, String firstName, String lastName){
+    public void addLibrarianToDatabase(Librarian librarian){
         try{
             PreparedStatement prepStat = connection.prepareStatement("INSERT INTO readers values (?,?,?)");
-            prepStat.setInt(1, ID);
-            prepStat.setString(2, firstName);
-            prepStat.setString(3, lastName);
+            prepStat.setInt(1, librarian.getID());
+            prepStat.setString(2, librarian.getFirstName());
+            prepStat.setString(3, librarian.getLastName());
             prepStat.execute();
         }catch(SQLException e){
             System.err.println("Error during adding readers to database");
@@ -53,14 +53,14 @@ public class DatabaseManager {
         }
     }
     //====================================================================================================================================================
-    public void addBookToDatabase(Integer bookID, String bookTitle, String authorName, String authorLastname, String category){
+    public void addBookToDatabase(Book book){
         try{
             PreparedStatement prepStat = connection.prepareStatement("INSERT INTO books values (?,?,?,?,?)");
-            prepStat.setInt(1, bookID);
-            prepStat.setString(2, bookTitle);
-            prepStat.setString(3, authorName);
-            prepStat.setString(4, authorLastname);
-            prepStat.setString(5, category);
+            prepStat.setInt(1, book.getBookID());
+            prepStat.setString(2, book.getBookTitle());
+            prepStat.setString(3, book.getAuthorName());
+            prepStat.setString(4, book.getAuthorLastname());
+            prepStat.setString(5, book.getCategory());
             prepStat.execute();
         }catch(SQLException e){
             System.err.println("Error during adding book to database");
@@ -68,15 +68,15 @@ public class DatabaseManager {
         }
     }
     //====================================================================================================================================================
-    public void addReaderToDatabase(Integer ID, String firstName, String lastName, String addressStreetName, Integer addressHouseNumber, String phoneNumber){
+    public void addReaderToDatabase(Reader reader){
         try{
             PreparedStatement prepStat = connection.prepareStatement("INSERT INTO readers values (?,?,?,?,?,?)");
-            prepStat.setInt(1, ID);
-            prepStat.setString(2, firstName);
-            prepStat.setString(3, lastName);
-            prepStat.setString(4, addressStreetName);
-            prepStat.setInt(5, addressHouseNumber);
-            prepStat.setString(6, phoneNumber);
+            prepStat.setInt(1, reader.getId());
+            prepStat.setString(2, reader.getName());
+            prepStat.setString(3, reader.getLastName());
+            prepStat.setString(4, reader.getAddressStreetName());
+            prepStat.setInt(5, reader.getAddressHouseNumber());
+            prepStat.setInt(6, reader.getPhoneNumber());
             prepStat.execute();
         }catch(SQLException e){
             System.err.println("Error during adding readers to database");
@@ -84,18 +84,36 @@ public class DatabaseManager {
         }
     }
     //====================================================================================================================================================
-    public void addLoanToDatabase(String issueDate, String dataReturned){
+    public void addLoanToDatabase(Reader reader, Book book, Librarian librarian){
         try{
-            PreparedStatement prepStat = connection.prepareStatement("INSERT INTO readers values (?,?,?)");
-            prepStat.setString(1, issueDate);
-            prepStat.setString(2, dataReturned);
-
+            PreparedStatement prepStat = connection.prepareStatement("INSERT INTO readers values (?,?,?,?,?,?,?,?)");
+            prepStat.setInt(1, book.getBookID());
+            prepStat.setString(2, book.getBookTitle());
+            prepStat.setInt(3, reader.getId());
+            prepStat.setString(4, reader.getName());
+            prepStat.setString(5, reader.getLastName());
+            prepStat.setInt(6, librarian.getID());
+            prepStat.setString(7, librarian.getFirstName());
+            prepStat.setString(8, librarian.getLastName());
             prepStat.execute();
         }catch(SQLException e){
             System.err.println("Error during adding readers to database");
             e.printStackTrace();
         }
     }
+    //SHOW READERS DATABASE
+    //SHOW BOOKS DATABASE - WITH FLAG HOW MANY IS AVAIABLE
+    //SHOW LOANS DATABASE
+    //SHOW READER ACCOUNT
+    //SHOW PENALTIES
+    //====================================================================================================================================================
+    public void showReadersDatabase(){
+        try{
+            ResultSet readersDatabase = statement.executeQuery("SELECT * from readers values");
 
-
+        }catch(SQLException e){
+            System.err.println("Error during adding readers to database");
+            e.printStackTrace();
+        }
+    }
 }

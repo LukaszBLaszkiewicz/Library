@@ -64,4 +64,5 @@ public class Reader {
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }
